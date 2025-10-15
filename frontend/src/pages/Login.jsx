@@ -23,9 +23,20 @@ const Login = () => {
   return (
     <div className="form-container">
       <form onSubmit={handleLogin} className="form-card">
+        <h2 className="school-title">ISMT</h2>
         <h1>Login</h1>
-        <input type="email" placeholder="Email" value={email} onChange={e=>setEmail(e.target.value)} />
-        <input type="password" placeholder="Password" value={password} onChange={e=>setPassword(e.target.value)} />
+        <input
+          type="email"
+          placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <input
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
         <button type="submit">Login</button>
         <p>
           Don't have an account? <Link to="/register">Register</Link>
@@ -57,6 +68,15 @@ const Login = () => {
           border-radius: 12px;
           box-shadow: 0 4px 12px rgba(0,0,0,0.2);
           width: 320px;
+        }
+
+        .school-title {
+          text-align: center;
+          font-size: 26px;
+          font-weight: bold;
+          color: #004aad; /* ISMT blue color */
+          margin-bottom: 10px;
+          letter-spacing: 1px;
         }
 
         .form-card h1 {

@@ -2,8 +2,28 @@ import { Link } from "react-router-dom";
 
 const Dashboard = () => {
   // Get logged-in user info from localStorage
-  const name = localStorage.getItem("name")
-  const role = localStorage.getItem("role") 
+  const name = localStorage.getItem("name");
+  const role = localStorage.getItem("role");
+
+  // Sample courses data
+  const courses = [
+    {
+      name: "BSc (Hons) Computer Science",
+      price: "NPR 7,50,000",
+    },
+    {
+      name: "BSc (Hons) Cyber Security",
+      price: "NPR 7,80,000",
+    },
+    {
+      name: "BMH (Bachelor in Business Management & Hospitality)",
+      price: "NPR 7,20,000",
+    },
+    {
+      name: "MBA (Master of Business Administration)",
+      price: "NPR 8,00,000",
+    },
+  ];
 
   return (
     <div className="dashboard-container">
@@ -15,6 +35,7 @@ const Dashboard = () => {
 
       <h1>Dashboard</h1>
 
+      {/* Main Role-Based Dashboard Cards */}
       <div className="dashboard-cards">
         {role === "admin" && (
           <>
@@ -37,6 +58,19 @@ const Dashboard = () => {
         {role === "student" && (
           <span className="welcome-text">Welcome, Student!</span>
         )}
+      </div>
+
+      {/* Courses Section */}
+      <div className="courses-section">
+        <h2>Available Courses</h2>
+        <div className="courses-grid">
+          {courses.map((course, index) => (
+            <div key={index} className="course-card">
+              <h3>{course.name}</h3>
+              <p className="course-price">{course.price}</p>
+            </div>
+          ))}
+        </div>
       </div>
 
       {/* Embedded CSS */}
@@ -117,10 +151,60 @@ const Dashboard = () => {
           color: #2c3e50;
         }
 
+        /* ===== Courses Section ===== */
+        .courses-section {
+          margin-top: 60px;
+          text-align: center;
+        }
+
+        .courses-section h2 {
+          font-size: 30px;
+          color: #004aad;
+          margin-bottom: 30px;
+        }
+
+        .courses-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+          gap: 25px;
+          justify-items: center;
+          padding: 0 20px;
+        }
+
+        .course-card {
+          background-color: #ffffff;
+          padding: 20px;
+          border-radius: 12px;
+          box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+          width: 260px;
+          transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .course-card:hover {
+          transform: translateY(-5px);
+          box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+
+        .course-card h3 {
+          font-size: 18px;
+          color: #2c3e50;
+          margin-bottom: 10px;
+        }
+
+        .course-price {
+          font-size: 16px;
+          color: #27ae60;
+          font-weight: bold;
+        }
+
         @media (max-width: 600px) {
           .dashboard-cards {
             flex-direction: column;
             align-items: center;
+          }
+
+          .course-card {
+            width: 90%;
           }
         }
       `}</style>

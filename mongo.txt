@@ -1,0 +1,5 @@
+mongodb+srv://surazkarkeee_db_user:kugCEheusKGKajOc@cluster0.sstqjfj.mongodb.net/
+
+
+
+mongodb+srv://surazkarkeee_db_user:kugCEheusKGKajOc@cluster0.sstqjfj.mongodb.net/
