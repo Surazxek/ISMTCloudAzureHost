@@ -10,6 +10,11 @@ import teacherRoutes from "./routes/teacherRoutes.js";
 dotenv.config();
 const app = express();
 
+app.get('/', (req, res) => {
+  res.send('Backend is running!');
+});
+
+
 app.use(cors({
   origin: "http://localhost:5173", // frontend URL (Vite default)
   credentials: true
