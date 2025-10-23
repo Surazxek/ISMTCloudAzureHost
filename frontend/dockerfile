@@ -30,3 +30,7 @@ EXPOSE 80
 
 # Start Nginx
 CMD ["nginx", "-g", "daemon off;"]
+
+# EXPOSE 3000
+
+# CMD ["npm", "start"]
