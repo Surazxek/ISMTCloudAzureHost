@@ -17,7 +17,8 @@ app.get('/', (req, res) => {
 
 app.use(cors({
   // origin: "http://localhost:5173", // frontend URL (Vite default)
-    origin:   "http://13.71.29.69",
+    origin:   "http://4.247.165.46:80",
+    
   credentials: true
 }));
 app.use(express.json());
