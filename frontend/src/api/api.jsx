@@ -1,8 +1,55 @@
+// import axios from "axios";
+
+// // const API_URL = "http://localhost:5000/api";
+
+// const API_URL = "http://4.247.134.202";
+
+// let accessToken = localStorage.getItem("accessToken");
+// let refreshToken = localStorage.getItem("refreshToken");
+
+// const api = axios.create({
+//   baseURL: API_URL,
+//   headers: { "Content-Type": "application/json" },
+// });
+
+// // Attach access token automatically
+// api.interceptors.request.use((config) => {
+//   if (accessToken) config.headers.Authorization = `Bearer ${accessToken}`;
+//   return config;
+// });
+
+// // Refresh token on 401
+// api.interceptors.response.use(
+//   (res) => res,
+//   async (error) => {
+//     const originalRequest = error.config;
+//     if (error.response?.status === 401 && !originalRequest._retry) {
+//       originalRequest._retry = true;
+//       try {
+//         const res = await axios.post(`${API_URL}/auth/refresh-token`, { token: refreshToken });
+//         accessToken = res.data.accessToken;
+//         localStorage.setItem("accessToken", accessToken);
+//         originalRequest.headers.Authorization = `Bearer ${accessToken}`;
+//         return api(originalRequest);
+//       } catch (err) {
+//         localStorage.removeItem("accessToken");
+//         localStorage.removeItem("refreshToken");
+//         localStorage.removeItem("role");
+//         window.location.href = "/login";
+//       }
+//     }
+//     return Promise.reject(error);
+//   }
+// );
+
+// export default api;
+
+
+
 import axios from "axios";
 
-// const API_URL = "http://localhost:5000/api";
-
-const API_URL = "http://4.247.134.202";
+// Use relative path so requests go through Nginx
+const API_URL = "/api";
 
 let accessToken = localStorage.getItem("accessToken");
 let refreshToken = localStorage.getItem("refreshToken");
@@ -18,7 +65,7 @@ api.interceptors.request.use((config) => {
   return config;
 });
 
-// Refresh token on 401
+// Refresh token on 401 Unauthorized response
 api.interceptors.response.use(
   (res) => res,
   async (error) => {
@@ -26,12 +73,16 @@ api.interceptors.response.use(
     if (error.response?.status === 401 && !originalRequest._retry) {
       originalRequest._retry = true;
       try {
+        // Request new access token using refresh token
         const res = await axios.post(`${API_URL}/auth/refresh-token`, { token: refreshToken });
         accessToken = res.data.accessToken;
+        // Update access token in localStorage
         localStorage.setItem("accessToken", accessToken);
+        // Update authorization header and retry original request
         originalRequest.headers.Authorization = `Bearer ${accessToken}`;
         return api(originalRequest);
       } catch (err) {
+        // On refresh failure, clear tokens and redirect to login
         localStorage.removeItem("accessToken");
         localStorage.removeItem("refreshToken");
         localStorage.removeItem("role");
@@ -43,3 +94,4 @@ api.interceptors.response.use(
 );
 
 export default api;
+

@@ -17,7 +17,7 @@ app.get('/', (req, res) => {
 
 app.use(cors({
 //   // origin: "http://localhost:5173", // frontend URL (Vite default)
-    origin:   "http://4.247.134.202:5000",
+    origin:   "http://4.247.134.202",
      methods: ['GET', 'POST'],
 
     
@@ -35,4 +35,6 @@ app.use("/api/students", studentRoutes);
 app.use("/api/teachers", teacherRoutes);
 
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
+// app.listen(PORT , () => console.log(`🚀 Server running on port ${PORT}`));
+
+app.listen(PORT, '0.0.0.0', () => console.log(`🚀 Server running on port ${PORT}`));
