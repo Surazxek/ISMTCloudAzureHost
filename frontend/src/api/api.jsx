@@ -2,7 +2,7 @@ import axios from "axios";
 
 // const API_URL = "http://localhost:5000/api";
 
-const API_URL = "http://4.247.165.46";
+const API_URL = "http://4.247.134.202";
 
 let accessToken = localStorage.getItem("accessToken");
 let refreshToken = localStorage.getItem("refreshToken");

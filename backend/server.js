@@ -16,11 +16,14 @@ app.get('/', (req, res) => {
 
 
 app.use(cors({
-  // origin: "http://localhost:5173", // frontend URL (Vite default)
-    origin:   "http://4.247.165.46:80",
+//   // origin: "http://localhost:5173", // frontend URL (Vite default)
+    origin:   "http://4.247.134.202:5000",
+     methods: ['GET', 'POST'],
+
     
   credentials: true
 }));
+
 app.use(express.json());
 
 // DB connection
